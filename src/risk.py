@@ -26,11 +26,14 @@ def local_factors(panel, eligible, rf_annual=.015):
         day,prior=dates[t],dates[t-1]
         if day.year!=prior.year or day.month!=prior.month:
             universe=eligible.iloc[t-1] & mom.iloc[t-1].notna() & caps.iloc[t-1].notna()
-            m=mom.iloc[t-1].where(universe)
-            small=caps.iloc[t-1] <= caps.iloc[t-1].where(universe).median()
-            lo,hi=m.quantile([.3,.7])
-            mom_labels={(s,v):universe & (small==s) & ((m<=lo) if v=='L' else (m>=hi))
-                        for s in [True,False] for v in ['L','H']}
+            if universe.any():
+                m=mom.iloc[t-1].where(universe)
+                small=caps.iloc[t-1] <= caps.iloc[t-1].where(universe).median()
+                lo,hi=m.quantile([.3,.7])
+                mom_labels={(s,v):universe & (small==s) & ((m<=lo) if v=='L' else (m>=hi))
+                            for s in [True,False] for v in ['L','H']}
+            else:
+                mom_labels=None
             if day.month==7:
                 prev_dec=np.flatnonzero((dates.year==day.year-1)&(dates.month==12))
                 if len(prev_dec):

@@ -364,7 +364,7 @@ def main():
           'MOM按252至21个交易日前的累计收益与规模形成2×3组合，每月更新。','small')
     doc.p('价值模型缺少历史账面权益公告版本认证，采用滞后PB快照，不能证明严格point-in-time。'
           '没有2014年12月数据，因此不补造2015年价值因子；风险因子不扣策略交易费。'
-          '北大标准因子附件需要人工验证码，本次没有把验证码HTML或替代序列伪装成标准下载结果。','small')
+          '本地因子定义与公开标准序列并不完全相同，本次Alpha结论限定在上述构建口径内。','small')
     doc.table(pd.DataFrame([[n,prob(alpha(f'{n}_LS_c10').p_holm_two_primary),verdicts[n]] for n in ['PATH','BREADTH']],
                            columns=['留出主假设','Holm校正p','正Alpha结论']))
 

@@ -5,6 +5,7 @@ import pandas as pd
 from src.factors import compute, quantiles
 from src.backtest import simulate, equal_weight, spread_return
 from src.statistics import hac_mean, model_alpha
+from src.risk import local_factors, monthly
 
 
 class ResearchTests(unittest.TestCase):
@@ -99,6 +100,28 @@ class ResearchTests(unittest.TestCase):
         alpha=model_alpha(y,f,long_short=True)[1]["alpha_month"]
         self.assertAlmostEqual(alpha,.001,places=10)
         self.assertAlmostEqual(model_alpha(y+.003,f)[1]["alpha_month"],.001,places=10)
+
+    def test_monthly_missing_factor_stays_missing(self):
+        daily=pd.DataFrame({'MKT':[.01,.02],'HML':[np.nan,np.nan]},index=self.days[:2])
+        result=monthly(daily)
+        self.assertAlmostEqual(result.MKT.iloc[0],1.01*1.02-1)
+        self.assertTrue(np.isnan(result.HML.iloc[0]))
+
+    def test_value_model_uses_previous_december_snapshot(self):
+        rng=np.random.default_rng(22)
+        days=pd.bdate_range('2015-01-01','2016-09-30')
+        price=pd.DataFrame(100*np.exp(rng.normal(0,.01,(len(days),36)).cumsum(axis=0)),index=days)
+        caps=pd.DataFrame(np.tile(np.arange(1,37),(len(days),1))*price.to_numpy(),index=days)
+        pb=pd.DataFrame(rng.uniform(.5,5,price.shape),index=days)
+        panel={'close':price,'market_cap_ashare':caps,'pb_ratio':pb}
+        eligible=price>0
+        first=local_factors(panel,eligible)
+        panel['pb_ratio']=pb.copy()
+        panel['pb_ratio'].loc['2016-06-30'] *= np.arange(1,37)
+        second=local_factors(panel,eligible)
+        pd.testing.assert_frame_equal(first,second)
+        self.assertTrue(first.loc[:'2016-06-30','HML'].isna().all())
+        self.assertTrue(first.loc['2016-07-01':,'HML'].notna().all())
 
 
 if __name__ == "__main__":
