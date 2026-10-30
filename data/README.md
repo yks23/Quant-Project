@@ -1,6 +1,7 @@
 # 公开数据源与下载
 
-核对日期：2026-10-30。GitHub 两个数据包的文件大小和 Qlib 摘要已通过 release API 核实；这不等于行情质量已验收。
+来源目录初次核对日期：2026-10-30。本次研究使用F.I.R.E.，实际文件审计和本地SHA-256另存于`results/data_audit.json`、`data_fields.csv`及`run_manifest.json`。
+Qlib与Zenodo仍是备选来源，不参与本次报告收益计算。
 
 ## 选型
 
@@ -52,7 +53,7 @@ HDF5 内部路径：`/date`、`/stock_code`、`/close`、`/previous_close`。
 
 ## 下载与校验
 
-完整的自然语言步骤见 [本地部署指南](../SETUP.md)。本仓库不提供自编脚本。
+完整的自然语言步骤见[本地部署指南](../SETUP.md)。本次计算入口见[RUN.md](../RUN.md)，程序直接读取真实Feather，缺字段报错，不使用上游随机回退接口。
 
 用浏览器打开上述直接下载链接，下载完成后移入仓库的 `data/raw/fire/`、`data/raw/qlib/` 或 `data/raw/zenodo/`。
 目录可以自己创建；这些目录是建议约定，不代表 clone 后已经存在数据文件。
