@@ -78,6 +78,18 @@ class ResearchTests(unittest.TestCase):
         bt = simulate(c,c,w,[1],self.days[2],self.days[-1])
         self.assertEqual(bt.nav.iloc[-1],1)
 
+    def test_suspended_positive_quotes_cannot_fill_orders(self):
+        c=pd.DataFrame({'a':[10,10,10,10]},index=self.days[:4])
+        tradable=pd.DataFrame({'a':[True,False,True,False]},index=c.index)
+        w=pd.DataFrame({'a':[1,1,0,0]},index=c.index)
+        bt=simulate(c,c,w,[0,1,2],self.days[1],self.days[3],cost_bps=0,
+                    execution_available=tradable)
+        self.assertEqual(bt.cash_weight.iloc[0],1)
+        self.assertEqual(bt.holdings.iloc[1],1)
+        self.assertEqual(bt.holdings.iloc[2],1)
+        self.assertEqual(bt.blocked_buy.sum(),1)
+        self.assertEqual(bt.blocked_sell.sum(),1)
+
     def test_short_leg_pays_costs(self):
         self.assertAlmostEqual(spread_return(.02-.001,.01-.001,.001),.008)
 

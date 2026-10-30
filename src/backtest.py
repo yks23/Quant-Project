@@ -4,9 +4,11 @@ import numpy as np
 import pandas as pd
 
 
-def simulate(open_price, close, target, signal_rows, start, end, cost_bps=10, limit=0.095):
+def simulate(open_price, close, target, signal_rows, start, end, cost_bps=10, limit=0.095,
+             execution_available=None):
     opens, closes = open_price.to_numpy(dtype=float), close.to_numpy(dtype=float)
     targets = target.to_numpy(dtype=float)
+    availability = None if execution_available is None else execution_available.to_numpy(dtype=bool)
     cash = 1.0
     shares = np.zeros(opens.shape[1])
     marks = np.full(opens.shape[1], np.nan)
@@ -24,6 +26,8 @@ def simulate(open_price, close, target, signal_rows, start, end, cost_bps=10, li
         traded, fees, blocked_buy, blocked_sell = 0.0, 0.0, 0, 0
         if t - 1 in signal_rows:
             valid_open = np.isfinite(opens[t]) & (opens[t] > 0)
+            if availability is not None:
+                valid_open &= availability[t]
             at_open = np.where(valid_open, opens[t], marks)
             nav_open = cash + np.nansum(shares * at_open)
             w = np.nan_to_num(targets[t - 1], nan=0.0)

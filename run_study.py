@@ -193,7 +193,8 @@ def main():
     for cost in cfg['cost_grid_bps']:
         names=factor_names if cost==10 else ['PATH','BREADTH']
         bench=simulate(opening,close,equal_weight(f['eligible']),signal_rows,
-                       pd.Timestamp(cfg['signal_start']),pd.Timestamp(cfg['end']),cost,cfg['execution_limit_proxy'])
+                       pd.Timestamp(cfg['signal_start']),pd.Timestamp(cfg['end']),cost,cfg['execution_limit_proxy'],
+                       execution_available=panel['volume'].gt(0))
         series[f'EW_c{cost}']=bench['return']
         diag.append({'portfolio':f'EW_c{cost}',**bench.drop(columns=['nav','return']).mean().to_dict()})
         for name in names:
@@ -202,7 +203,8 @@ def main():
                 key=f'{name}_Q{q}_c{cost}'
                 print(f'Cash account: {key}',flush=True)
                 result=simulate(opening,close,equal_weight(groups.eq(q)),signal_rows,
-                                pd.Timestamp(cfg['signal_start']),pd.Timestamp(cfg['end']),cost,cfg['execution_limit_proxy'])
+                                pd.Timestamp(cfg['signal_start']),pd.Timestamp(cfg['end']),cost,cfg['execution_limit_proxy'],
+                                execution_available=panel['volume'].gt(0))
                 series[key]=result['return']
                 row={'portfolio':key,**result.drop(columns=['nav','return']).mean().to_dict(),
                      'max_stale_weight':result.stale_weight.max(),
