@@ -41,6 +41,7 @@ python -c "import json; from src.data import sha256; expected=json.load(open('re
 python -m unittest discover -s tests -v
 python run_study.py --extract
 python postprocess.py
+python market_reference.py
 python build_report.py
 ```
 
@@ -49,6 +50,7 @@ python build_report.py
 
 `run_study.py`依次进行字段校验、因子计算、账户模拟、控制排序、回归和风险模型构建。每个账户会输出进度。
 `postprocess.py`汇总留出期辅助检验、RF敏感性和结果完整性；`build_report.py`从这些CSV生成图、中文PDF及Markdown。
+`market_reference.py`按年读取腾讯财经公开沪深300日线，缓存响应和摘要，仅用作大盘比较，不影响策略构建或主检验。
 命令会重建本地聚合结果，想比较新方案时先保存原结果或新建分支，不覆盖固定方案冒充同一实验。
 
 中文PDF需要支持中文的TrueType字体。macOS默认读取Arial Unicode；其他系统可设置字体文件路径：

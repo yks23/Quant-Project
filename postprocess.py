@@ -58,6 +58,8 @@ def main():
     signal=pd.read_csv(OUT/'signal_audit.csv',index_col=0,parse_dates=True)
     audit=json.loads((OUT/'data_audit.json').read_text())
     diagnostics=pd.read_csv(OUT/'execution_diagnostics.csv')
+    account=pd.read_parquet(ROOT/'data/processed/PATH_Q5_c10_account.parquet')
+    active_days=account.index[account.holdings>0]
     tests={
         'all_portfolio_returns_finite':bool(np.isfinite(daily.to_numpy()).all()),
         'no_portfolio_day_loses_more_than_100pct':bool((daily>-1).all().all()),
@@ -69,6 +71,8 @@ def main():
         'eligible_at_last_date':int(signal.loc[daily.index[-1],'eligible_n']),
         'trade_days':len(daily),'first_signal_date':str(daily.index[0].date()),
         'first_possible_entry_date':str(daily.index[1].date()),
+        'first_positive_eligible_date':str(signal.index[signal.eligible_n>0][0].date()),
+        'first_actual_entry_date':str(active_days[0].date()),
         'last_valuation_date':str(daily.index[-1].date()),
         'breadth_above_half_fraction':float((signal.loc[daily.index,'breadth']>.5).mean()),
         'return_reconciliation_p99':audit['return_price_p99_abs_difference'],
@@ -78,6 +82,17 @@ def main():
                                   'no_duplicate_dates','no_negative_average_cash','matching_fields']):
         raise ValueError(f'Result integrity check failed: {tests}')
     (OUT/'integrity_checks.json').write_text(json.dumps(tests,indent=2))
+    reconciliations=[]
+    for path in sorted((ROOT/'data/processed').glob('*_account.parquet')):
+        name=path.name.removesuffix('_account.parquet')
+        a=pd.read_parquet(path)
+        error=float(np.max(np.abs(a.nav.to_numpy()-(1+daily[name]).cumprod().to_numpy())))
+        valid=bool(error<1e-7 and (a.fees>=0).all() and (a.cash_weight>=-1e-9).all())
+        reconciliations.append({'portfolio':name,'max_nav_reconciliation_error':error,'passed':valid})
+    reconciliation=pd.DataFrame(reconciliations)
+    reconciliation.to_csv(OUT/'account_reconciliation.csv',index=False)
+    if not reconciliation.passed.all():
+        raise ValueError('Account NAV reconciliation failed')
     annual=coverage.join(signal.eligible_n).groupby(coverage.index.year).agg(['min','median','max'])
     annual.to_csv(OUT/'coverage_annual.csv')
     print('Auxiliary summaries and integrity checks complete.',flush=True)

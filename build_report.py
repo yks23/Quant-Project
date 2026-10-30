@@ -3,6 +3,7 @@
 import os
 from pathlib import Path
 import json
+import subprocess
 from html import escape
 import numpy as np
 import pandas as pd
@@ -22,6 +23,7 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (BaseDocTemplate, PageTemplate, Frame, Paragraph,
                                Spacer, PageBreak, Table, TableStyle, Image)
 from reportlab.platypus.tableofcontents import TableOfContents
+from src.data import sha256
 
 R=ROOT/'results'
 P=ROOT/'reports'
@@ -50,6 +52,8 @@ def plots():
     plt.rcParams.update({'font.size':9,'axes.spines.top':False,'axes.spines.right':False,
                          'axes.grid':True,'grid.alpha':.22,'savefig.dpi':170})
     returns=pd.read_csv(R/'daily_portfolio_returns.csv',index_col=0,parse_dates=True)
+    reference=pd.read_csv(R/'market_reference_returns.csv',index_col=0,parse_dates=True)
+    returns['CSI300']=reference.CSI300_price_index
     cov=pd.read_csv(R/'coverage_daily.csv',index_col=0,parse_dates=True)
     sig=pd.read_csv(R/'signal_audit.csv',index_col=0,parse_dates=True)
     def finish(fig,name):
@@ -67,13 +71,14 @@ def plots():
         for q,col in zip(range(1,6),COLORS):
             ax.plot(returns.index,(1+returns[f'{name}_Q{q}_c10']).cumprod(),label=f'Q{q}',color=col,lw=1.15)
         ax.plot(returns.index,(1+returns.EW_c10).cumprod(),label='EW universe',color='black',ls='--',lw=1)
+        ax.plot(returns.index,(1+returns.CSI300).cumprod(),label='CSI300 price',color='#577eaa',ls=':',lw=1.3)
         ax.axvline(pd.Timestamp('2022-01-01'),color='#777777',ls=':',lw=1)
         ax.set(title=f'{name}: long-only quintiles, 10 bp per leg',ylabel='NAV (initial = 1)')
-        ax.legend(ncol=6,fontsize=8)
+        ax.legend(ncol=4,fontsize=8)
         finish(fig,f'{name.lower()}_quintiles')
     fig,axes=plt.subplots(2,1,figsize=(7.2,4.8),sharex=True)
     for name,col in [('PATH_LS_c10',COLORS[4]),('BREADTH_LS_c10',COLORS[1]),
-                     ('REV_LS_c10',COLORS[0]),('EW_c10','#111111')]:
+                     ('REV_LS_c10',COLORS[0]),('EW_c10','#111111'),('CSI300','#577eaa')]:
         nav=(1+returns[name]).cumprod()
         label=name.replace('_LS_c10',' L/S').replace('EW_c10','EW market')
         axes[0].plot(nav.index,nav,label=label,color=col,lw=1.1)
@@ -161,6 +166,7 @@ class Report:
         self.story=[]
         self.markdown=[]
         self.count=0
+        self.sections=[]
 
     def p(self,text,style='body'):
         self.story.append(Paragraph(escape(text).replace('\n','<br/>'),self.styles[style]))
@@ -170,9 +176,12 @@ class Report:
         self.story.append(PageBreak())
         self.count+=1
         p=Paragraph(escape(title),self.styles['h1'])
-        p.toc_key=f'section{self.count}'
+        key=f'section{self.count}'
+        if not title.startswith('目录'):
+            p.toc_key=key
+            self.sections.append((title,key))
         self.story.append(p)
-        self.markdown.append(f'## {title}\n')
+        self.markdown.append(f'<a id="{key}"></a>\n\n## {title}\n')
 
     def h2(self,text):
         self.p(text,'h2')
@@ -204,7 +213,14 @@ class Report:
 
     def finish(self):
         ReportDoc(P/'factor_study_report.pdf').multiBuild(self.story)
-        (P/'factor_study_report.md').write_text('\n'.join(self.markdown),encoding='utf-8')
+        contents='\n'.join(f'- [{title}](#{key})' for title,key in self.sections)
+        (P/'factor_study_report.md').write_text('\n'.join(self.markdown).replace('{{TOC}}',contents),encoding='utf-8')
+        (R/'report_build_manifest.json').write_text(json.dumps({
+            'code_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+            'pdf_sha256':sha256(P/'factor_study_report.pdf'),
+            'markdown_sha256':sha256(P/'factor_study_report.md'),
+            'main_backtest_commit':json.loads((R/'run_manifest.json').read_text())['code_commit'],
+        },indent=2))
 
 
 def main():
@@ -226,7 +242,11 @@ def main():
     def perf_table(names,period):
         rows=[]
         for name in names:
-            p=stat(name,period)
+            if name=='CSI300':
+                rp=read('market_reference_performance')
+                p=rp[rp.period==period].iloc[0]
+            else:
+                p=stat(name,period)
             rows.append([name.replace('_c10',''),pct(p.annual_mean),pct(p.cagr),num(p.sharpe),pct(p.max_drawdown)])
         return pd.DataFrame(rows,columns=['组合','年化均值','年化复利','Sharpe','最大回撤'])
     verdicts={}
@@ -246,12 +266,17 @@ def main():
         doc.p(f'{label}（{name}）：留出期多空年化均值{pct(p.annual_mean)}，'
               f'四因子年化Alpha {pct(a.alpha_annual)}，HAC t={num(a.t)}，'
               f'两主检验Holm校正p={prob(a.p_holm_two_primary)}；{verdicts[name]}。')
+    gross=stat('PATH_LS_c0','holdout')
+    net=stat('PATH_LS_c10','holdout')
+    doc.p(f'最直接的经济结论：PATH留出期无成本年化均值为{pct(gross.annual_mean)}，'
+          f'单边10bp后降为{pct(net.annual_mean)}，费用与换手足以改变方向。'
+          '路径的控制后增量关系和广度的条件调节均缺乏留出期统计支持。')
     doc.p('以上Alpha使用本研究按事前规则重建的本地FF式风险因子代理，'
           '已运行CAPM、FF3和Carhart四因子模型结构；结果不等同于使用官方标准因子序列。'
           '固定年化1.5%的RF属于假设，报告同时给出0%和3%的敏感性。')
     doc.p('报告保留所有预设方向、窗口与成本结果，包括不支持假设的证据。'
           '多空收益是100%多头与100%空头的研究组合，未计融券费及保证金，不构成可执行收益承诺。','small')
-    doc.p(f'复现版本：{manifest["code_commit"][:12]}\n方案冻结提交：a5f6d25；实现澄清见PROTOCOL.md。','small')
+    doc.p(f'主回测版本：{manifest["code_commit"][:12]}\n方案冻结提交：a5f6d25；实现澄清见PROTOCOL.md。','small')
 
     doc.section('目录与课程要求对应')
     toc=TableOfContents()
@@ -259,13 +284,24 @@ def main():
     doc.story.append(toc)
     doc.story.append(Spacer(1,12))
     doc.p('阅读顺序：先看核心结论，再看样本、执行口径和主检验；原始假设是否成立主要由双重排序与增量回归回答。','small')
-    doc.markdown.append('目录：数据与样本；固定方案；因子定义；PATH；BREADTH；多空；模型；原问题；增量；稳健性；质量；复现。\n')
+    doc.markdown.append('{{TOC}}\n')
+    doc.table(pd.DataFrame([
+        ['数据组成、回测区间','第1-2节；完整字段和数据指纹'],
+        ['CAPM、FF3、四因子Alpha','第7节；本地FF式代理，明确来源边界'],
+        ['策略与proxy、禁止数据挖掘','第2-3节及事前提交PROTOCOL.md'],
+        ['Q1-Q5与多空、市场及回撤','第4-7节；同时比较EW和沪深300'],
+        ['行为金融解释、增量信息','第3、8-10节；区分假设与因果证据'],
+        ['控制排序、时期、成本','第10-12节；固定辅助检验全部保留'],
+    ],columns=['课程要求','对应证据']),[7.3*cm,10.1*cm])
 
     doc.section('1. 数据组成与样本边界')
     doc.p(f'本次读取真实Feather文件，原始字段覆盖{fields.iloc[0]["start"]}至{fields.iloc[0]["end"]}，'
           f'{data["n_dates"]}个日期、{data["n_securities"]}个沪深A股代码。'
           f'研究收益序列包含{check["trade_days"]}个交易日，首末有效股票数为'
           f'{check["eligible_at_first_date"]}与{check["eligible_at_last_date"]}。')
+    doc.p(f'60个历史观察的暖启动使开始阶段持有现金；首次合格日期为{check["first_positive_eligible_date"]}，'
+          f'固定五日调仓网格上的首次实际入场为{check["first_actual_entry_date"]}。'
+          '原包5363列中，代码筛选排除的302132.SZ仅有2025年记录，不改变2015-2024回测样本。','small')
     doc.table(pd.DataFrame([
         ['量价','open、close、volume、money','调整开收盘用于收益与成交；成交额用于Amihud'],
         ['原始价格','close_dr','原价分组控制，不用于与复权价混算收益'],
@@ -321,7 +357,7 @@ def main():
 
     for section,name,cn in [(4,'PATH','路径因子'),(5,'BREADTH','市场广度状态因子')]:
         doc.section(f'{section}. {cn}：全市场Q1至Q5')
-        doc.figure(f'{name.lower()}_quintiles',f'图：{name}五组净值，单边10bp；虚线为等权样本基准，竖线为留出期起点。')
+        doc.figure(f'{name.lower()}_quintiles',f'图：{name}五组净值，单边10bp；同时比较等权样本基准与沪深300价格指数，竖线为留出期起点。')
         rows=[]
         for q in range(1,6):
             key=f'{name}_Q{q}_c10'
@@ -344,9 +380,13 @@ def main():
 
     doc.section('6. 多空收益、基准与最大回撤')
     doc.figure('spread_drawdown','图：100%多头、100%空头的日收益差复利；EW是100%多头基准，敞口不同，不按净值高低直接判断优劣。')
-    doc.table(perf_table(['PATH_LS_c10','BREADTH_LS_c10','REV_LS_c10','EW_c10'],'full'))
+    doc.table(perf_table(['PATH_LS_c10','BREADTH_LS_c10','REV_LS_c10','EW_c10','CSI300'],'full'))
+    doc.p('沪深300来自腾讯财经公开指数日线，完整匹配2374个研究交易日；它是价格指数，未计分红再投资和交易费。'
+          'CSI300用于大盘参考，EW用于相同股票池的可比评价，两者均不用于选择因子参数。','small')
     doc.p('年化均值=日均收益×252；年化复利按252个交易日折算；Sharpe对多头扣RF、对零净敞口多空直接使用收益。'
           '最大回撤以初始净值1为历史高点候选。费用按实际成交金额收取；空头腿不能因“减去净多头收益”而错误获得费用返还。','small')
+    doc.p('具体计算为r_LS=r_Q5_net-r_Q1_net-2×fee_Q1，fee为费用/上日净值。'
+          '五组表列的是各自多头净收益；直接相减会错误抵消空头一腿费用，所以并不等于本报告正确扣两腿成本后的多空收益。','small')
     doc.p('多空曲线是每日两腿收益差的复利指数，隐含持续维持两腿名义比例；它不是具备融券借贷、保证金追缴和借券召回处理的真实融资账户。','small')
 
     doc.section('7. CAPM、FF3和四因子Alpha比较')
@@ -379,6 +419,8 @@ def main():
         for _,r in ds[(ds.factor=='LOSER_PATH')&(ds.period==period)].iterrows():
             rows.append([title,int(r.control_group),pct(r['mean']),num(r.t),prob(r.p),int(r.n)])
     doc.table(pd.DataFrame(rows,columns=['区间','R5档','集中-分散','HAC t','p','形成期']))
+    doc.p('留出期三档差额不呈现稳定一致的统计证据：最深跌幅档约+0.31%/五日，p约0.051；'
+          '中间档为负，较浅档为正，但均未达到5%水平。这些辅助比较还面临多重检验，不能据某一格宣称发现路径溢价。')
     doc.p('R5档1的累计跌幅更深，档3较浅；三分组仍有组内跌幅差，故另做连续控制回归。'
           '这里的事件收益不扣成本、不处理成交拒绝，仅用于检验信息关系；投资表现以现金账户回测为准。'
           '缺失未来开盘只从事件统计中缺测，不回改当时选股名单；formed_n和observed_n可在明细核查。','small')
@@ -400,6 +442,8 @@ def main():
         r=bstate[(bstate.period==period)&(bstate.variable=='breadth')].iloc[0]
         rows.append([title,pct(r['mean']*.1),num(r.t),prob(r.p),int(r.n)])
     doc.table(pd.DataFrame(rows,columns=['区间','广度+10pp的收益差','HAC t','p','形成期']))
+    doc.p('留出期PATH控制系数约-2.16bp/标准差，p约0.255；广度+10个百分点的条件收益差约+7.34bp，p约0.907。'
+          '因此本次数据不能支持两者在已有控制变量之外提供稳定的正向增量信息。','small')
     doc.p('被解释变量为普通反转REV的未来五日Q5-Q1；解释变量为形成日B、过去五日市场平均收益、20日市场波动。'
           '不能在同日横截面同时放入BREADTH和R5并期待独立识别，因为二者当日成比例。'
           '该条件相关回归与行为金融解释相容与否，均不能单独证明恐慌、注意力或因果关系。','small')
@@ -455,6 +499,8 @@ def main():
     doc.table(pd.DataFrame(rows,columns=['主组合','平均持股数','年化双边换手','平均现金','最大滞价资金']))
     doc.p('换手为买入加卖出成交额/净值，属于双边口径；成本按该成交额计。'
           '延续最后正价可避免按未来缺失先删除股票，但无法恢复未知退市清算损失；较小滞价比例也不证明退市历史完整。','small')
+    doc.p(f'所有账户中最大滞价资金占比达到{pct(check["max_stale_weight"])}，主多空腿最高约16.66%，'
+          '属于实质性数据边界，不应把留价估值解释为可变现价格。本文不据这些回测推断可交易利润。','small')
     sens=read('rf_sensitivity')
     rows=[]
     for name in ['PATH_LS_c10','BREADTH_LS_c10','PATH_Q5_c10','BREADTH_Q5_c10']:
@@ -481,6 +527,11 @@ def main():
           f'广度每提高10个百分点，条件反转差额改变{pct(b["mean"]*.1)}（t={num(b.t)}，p={prob(b.p)}）。'
           '应与下跌样本双重排序合并解读，不能把全市场PATH的收益直接归因于“暴跌比阴跌更反弹”。')
     doc.h2('本次工作支持的表述')
+    doc.p(f'PATH的成本前留出收益{pct(gross.annual_mean)}，扣10bp后{pct(net.annual_mean)}，'
+          f'相差{100*(gross.annual_mean-net.annual_mean):.2f}个百分点/年；'
+          f'BREADTH即使零成本留出年化均值也为{pct(stat("BREADTH_LS_c0","holdout").annual_mean)}。'
+          '前者显示高换手现象与净收益之间的落差，后者提示固定广度切换规则本身不成立。'
+          '负结果不授权事后反向做空并继续声称同一假设得到支持。')
     doc.p('我们固定两个小问题，下载并审计公开日频面板，建立可追溯的因子与成交账户，'
           '完成五分组、三种风险模型结构、普通反转对照、独立控制排序、增量回归和成本/时期敏感性。'
           '结果与方向均完整保留。工作量体现在可复核的测量和反证，而不是因子搜索数量。')
@@ -497,7 +548,7 @@ def main():
     doc.section('14. 复现、文件索引与参考资料')
     doc.p('在仓库根目录使用Python 3.12和独立虚拟环境，按RUN.md下载固定资产、校验SHA-256，再运行：')
     doc.p('python -m pip install -r requirements.txt\npython -m unittest discover -s tests -v\n'
-          'python run_study.py --extract\npython postprocess.py\npython build_report.py','small')
+          'python run_study.py --extract\npython postprocess.py\npython market_reference.py\npython build_report.py','small')
     doc.table(pd.DataFrame([
         ['config/study.json、PROTOCOL.md','窗口、样本划分、主假设与固定方向'],
         ['src/data.py、src/factors.py','真实字段校验与两个因子的计算'],
@@ -512,6 +563,7 @@ def main():
     refs=[
         ('F.I.R.E.数据与字段说明','https://fire-institute.github.io/fire/data/a-share/'),
         ('固定公开数据资产','https://github.com/fire-institute/fire/releases/tag/marketdata'),
+        ('沪深300市场参考数据，腾讯财经公开日线入口','https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2024-01-01,2024-12-31,640,qfq'),
         ('北大中国市场因子与技术文档入口（官方序列复核候选）','https://www.gsm.pku.edu.cn/finvc/info/1027/1147.htm'),
         ('Da, Gurun, Warachka (2014), Frog in the Pan: Continuous Information and Momentum','https://doi.org/10.1093/rfs/hhu003'),
         ('Reversals and the Returns to Liquidity Provision','https://www.nber.org/papers/w30917'),
