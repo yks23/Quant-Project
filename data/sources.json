@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-10-30",
+  "sources": {
+    "fire": {
+      "name": "F.I.R.E. AStockData",
+      "version": "marketdata / GitHub asset 256635084",
+      "release_url": "https://github.com/fire-institute/fire/releases/tag/marketdata",
+      "metadata_url": "https://api.github.com/repos/fire-institute/fire/releases/tags/marketdata",
+      "documentation_url": "https://fire-institute.github.io/fire/data/a-share/",
+      "coverage_claim": "Documentation: 2015-01-01 to 2025-05-01; 2509 dates, 5363 securities. Archive content not yet audited.",
+      "redistribution_status": "Not established for underlying market data; upstream code license is not a data license.",
+      "files": [
+        {
+          "name": "AStockData.tar.gz",
+          "url": "https://github.com/fire-institute/fire/releases/download/marketdata/AStockData.tar.gz",
+          "size_bytes": 1396296954,
+          "sha256": null,
+          "verification_basis": "GitHub release API asset 256635084; digest is null, last updated 2025-05-21. Size alone does not establish immutable content."
+        }
+      ]
+    },
+    "qlib": {
+      "name": "chenditc/investment_data community Qlib data",
+      "version": "2026-10-29",
+      "release_url": "https://github.com/chenditc/investment_data/releases/tag/2026-10-29",
+      "metadata_url": "https://api.github.com/repos/chenditc/investment_data/releases/tags/2026-10-29",
+      "documentation_url": "https://github.com/chenditc/investment_data",
+      "coverage_claim": "Release date is not a guarantee of actual per-security data coverage; inspect calendar, instruments and non-missing feature observations.",
+      "redistribution_status": "Mixed upstream sources; permission to mirror the underlying market records is not established.",
+      "files": [
+        {
+          "name": "qlib_bin.manifest.json",
+          "url": "https://github.com/chenditc/investment_data/releases/download/2026-10-29/qlib_bin.manifest.json",
+          "size_bytes": 511,
+          "sha256": "5e61c889df513d2649a9f823e310780ab25c8b59d71e83537353c39eaa40679a",
+          "verification_basis": "GitHub release API asset 688715394"
+        },
+        {
+          "name": "qlib_bin.tar.gz",
+          "url": "https://github.com/chenditc/investment_data/releases/download/2026-10-29/qlib_bin.tar.gz",
+          "size_bytes": 569939495,
+          "sha256": "53ef81ae8da3c92ce282b091da3a44d2668bf3d1865fb9a6662a82a3db9d6ac3",
+          "verification_basis": "GitHub release API asset 688713997"
+        }
+      ]
+    },
+    "zenodo": {
+      "name": "Chinese futures minute-bar and A-share daily price data (A-share file only)",
+      "version": "10.5281/zenodo.22234132 / v1",
+      "release_url": "https://zenodo.org/records/22234132",
+      "metadata_url": "https://zenodo.org/records/22234132/files/dataset_manifest.json?download=1",
+      "documentation_url": "https://zenodo.org/records/22234132/files/DATA_DICTIONARY.md?download=1",
+      "coverage_claim": "Publisher manifest: 2005-01-04 to 2026-08-14; 5250 dates, 5385 securities. Excludes volume, opening prices and market capitalization.",
+      "redistribution_status": "Record/README did not establish a clear underlying-data redistribution license; exploratory candidate only.",
+      "files": [
+        {
+          "name": "china_ashare_daily_prices_2005_2026.h5",
+          "url": "https://zenodo.org/records/22234132/files/china_ashare_daily_prices_2005_2026.h5?download=1",
+          "size_bytes": 158576449,
+          "sha256": "606a5f5ac1ec00542778fec1254f9e59d6666e24b9f0321eadf10556c8f41198",
+          "verification_basis": "Publisher dataset_manifest.json; data content and corporate-action semantics not yet audited."
+        }
+      ]
+    }
+  }
+}
