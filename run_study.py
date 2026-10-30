@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import importlib.metadata
 import subprocess
 import sys
 import numpy as np
@@ -14,7 +15,7 @@ from statsmodels.stats.multitest import multipletests
 
 from src.data import extract, load_panel, sha256
 from src.factors import compute, quantiles
-from src.backtest import simulate, equal_weight
+from src.backtest import simulate, equal_weight, spread_return
 from src.statistics import performance, model_alpha, hac_mean
 from src.risk import local_factors, monthly
 
@@ -161,7 +162,10 @@ def main():
     panel,audit=load_panel(args.data,RESULTS)
     cfg['data_archive_sha256']=sha256(args.archive)
     cfg['python']=platform.python_version()
+    cfg['dependencies']={name:importlib.metadata.version(name) for name in
+                         ['numpy','pandas','scipy','statsmodels','pyarrow','matplotlib','reportlab']}
     cfg['code_commit']=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+    cfg['tracked_code_dirty']=bool(subprocess.check_output(['git','diff','--name-only'],text=True).strip())
     cfg['data_content_audited']=True
     (RESULTS/'run_manifest.json').write_text(json.dumps(cfg,indent=2))
     for key in panel:
@@ -209,7 +213,7 @@ def main():
             r5=series[f'{name}_Q5_c{cost}']
             r1=series[f'{name}_Q1_c{cost}']
             short_account=pd.read_parquet(f'data/processed/{name}_Q1_c{cost}_account.parquet')
-            series[f'{name}_LS_c{cost}']=r5-r1-2*short_account.fees
+            series[f'{name}_LS_c{cost}']=spread_return(r5,r1,short_account.fees)
     returns=pd.DataFrame(series)
     returns.to_csv(RESULTS/'daily_portfolio_returns.csv',index_label='date',float_format='%.10g')
     diagnostics=pd.DataFrame(diag)

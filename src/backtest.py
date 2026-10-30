@@ -68,3 +68,8 @@ def simulate(open_price, close, target, signal_rows, start, end, cost_bps=10, li
 def equal_weight(mask):
     weights = mask.astype(float)
     return weights.div(weights.sum(axis=1).replace(0, np.nan), axis=0).fillna(0).astype("float32")
+
+
+def spread_return(long_net, short_leg_net, short_leg_fees):
+    """Subtracting a net long return otherwise incorrectly credits short fees."""
+    return long_net - short_leg_net - 2 * short_leg_fees

@@ -1,7 +1,7 @@
 # 下载与本地部署指南
 
 本指南面向第一次接手项目的组员。无需数据库账号、不用购买接口，也不需要启动网页或服务端。
-本仓库只存说明、地址和版本信息；大文件从公开上游获取。以下步骤按上游文档整理，尚未在完整行情上做端到端测试。
+本指南保留多数据源的下载选择；运行本次两个因子请先看[RUN.md](RUN.md)。原始大文件从公开上游获取，不再分发。
 
 ## 1. 先选哪套数据
 
@@ -52,21 +52,16 @@ python -m pip install --upgrade pip
 
 ### 部署和加载
 
-在独立虚拟环境内安装 `firefin` 和读取 Feather 所需的 `pyarrow`。依据上游文档，用 `firefin load` 导入已下载的包：
+本研究改为直接读取归档中的真实Feather文件，不依赖`firefin`。若按本节旧目录下载，可执行：
 
 ```bash
-python -m pip install firefin pyarrow
-firefin load data/raw/fire/AStockData.tar.gz
+python -m pip install -r requirements-tested.txt
+python run_study.py --extract --archive data/raw/fire/AStockData.tar.gz
 ```
 
-运行前可先用 `firefin --help` 和 `firefin load --help` 查看当前安装版本的参数。官方文档的默认数据位置是用户主目录下的 `~/.fire/data/raw`，不一定就在本仓库里面。
-导入前先查看归档文件列表，确认是数据文件，不包含越界路径、异常链接或可执行程序；不要把不明来源归档直接导入已有重要目录。
-若安装版本与文档不一致，优先查 [上游 README](https://github.com/fire-institute/fire)；也可手动解压到空目录，按实际 Feather 文件布局读取，不要假定内部路径已验收。
-
-打开 Python 或 Notebook，通过 `firefin.fetch_data` 按字段取数据。第一轮只请求 `close`、`open`、`volume`；能读取后再增加 `market_cap_ashare` 和 `turnover_ratio`。
-官方接口返回以字段名为键的数据；字段对应日期 × 证券矩阵。不要一次加载所有财务和融资融券字段。
-
-如果直接读取 Feather，可用 pandas 的 `read_feather`；必须查看日期是否存成普通列，再设置索引。不要凭列的位置猜日期或证券代码。
+代码仅提取白名单字段，校验日期/代码对齐及缺失值。默认根目录为`data/extracted/fire_data/`。
+2026-10-31核查上游`src/firefin/data/gateway.py`发现，无效字段可能返回随机合成数据，故不要把`fetch_data`返回矩阵直接当作真实行情。
+直接用pandas的`read_feather`读取已核实文件，缺字段时停止，而不是补随机值。当前数据包保留了pandas日期索引；读取后显式转换为日期。
 
 ### 如何确认部署成功
 

@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 
 from src.factors import compute, quantiles
-from src.backtest import simulate, equal_weight
+from src.backtest import simulate, equal_weight, spread_return
 from src.statistics import hac_mean, model_alpha
 
 
@@ -76,6 +76,19 @@ class ResearchTests(unittest.TestCase):
         w = equal_weight(c<0)
         bt = simulate(c,c,w,[1],self.days[2],self.days[-1])
         self.assertEqual(bt.nav.iloc[-1],1)
+
+    def test_short_leg_pays_costs(self):
+        self.assertAlmostEqual(spread_return(.02-.001,.01-.001,.001),.008)
+
+    def test_breadth_is_a_state_not_new_cross_sectional_information(self):
+        c,v,m=self.panel()
+        f=compute(c,v,m,warmup=10)
+        state=2*f['breadth']-1
+        for t in range(10,len(c)):
+            if abs(state.iloc[t])<1e-12:
+                continue
+            expected=f['REV'].iloc[t] if state.iloc[t]>0 else -f['REV'].iloc[t]
+            np.testing.assert_allclose(f['BREADTH'].iloc[t].rank(),expected.rank(),equal_nan=True)
 
     def test_alpha_does_not_subtract_rf_from_spread(self):
         rng=np.random.default_rng(1)
