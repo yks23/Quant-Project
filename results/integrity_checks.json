@@ -1,0 +1,18 @@
+{
+  "all_portfolio_returns_finite": true,
+  "no_portfolio_day_loses_more_than_100pct": true,
+  "no_duplicate_dates": true,
+  "no_negative_average_cash": true,
+  "matching_fields": true,
+  "max_stale_weight": 0.2543787011,
+  "eligible_at_first_date": 0,
+  "eligible_at_last_date": 5085,
+  "trade_days": 2374,
+  "first_signal_date": "2015-04-01",
+  "first_possible_entry_date": "2015-04-02",
+  "first_positive_eligible_date": "2015-04-03",
+  "first_actual_entry_date": "2015-04-10",
+  "last_valuation_date": "2024-12-31",
+  "breadth_above_half_fraction": 0.46040438079191237,
+  "return_reconciliation_p99": 5.373731255531311e-07
+}

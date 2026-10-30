@@ -33,6 +33,14 @@ cd Quant-Project
 “全市场”仅指数据内全部符合条件的历史记录，退市完整性与财务point-in-time未经官方主表认证。
 多空组合是假设可借券的研究指标，不是已验证可交易的新Alpha。
 
+## 留出期结论
+
+2022-2024固定方向、单边10bp：PATH多空年化均值为-2.91%，BREADTH为-24.51%；两个主假设均未通过正Alpha检验。
+PATH零成本年化均值为12.45%，显示高换手成本的重要性。报告同时保留不支持假设的结果，不事后翻转方向。
+本地四因子年化Alpha分别为+0.67%与-27.92%，Holm校正p分别为0.921与0.002；后者是负Alpha，不是支持原假设。
+
+完整口径、滞价持仓边界和增量检验见PDF；15项单元测试及结果验证记录在[verification.json](results/verification.json)。
+
 ## 文件与数据
 
 运行收据和实际数据摘要见[run_manifest.json](results/run_manifest.json)，数据来源见[data/README.md](data/README.md)。

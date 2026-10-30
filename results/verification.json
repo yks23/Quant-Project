@@ -1,0 +1,19 @@
+{
+  "unit_tests_pass": true,
+  "unit_test_count": 15,
+  "finite_daily_returns": true,
+  "daily_return_rows": 2374,
+  "portfolio_series": 57,
+  "cash_account_reconciliations": 45,
+  "all_accounts_reconcile": true,
+  "three_models_present": true,
+  "two_primary_holm_tests": true,
+  "pdf_pages": 16,
+  "pdf_bookmarks": 14,
+  "all_pdf_pages_have_text": true,
+  "selectable_chinese_text": true,
+  "pdf_hash_matches": true,
+  "markdown_hash_matches": true,
+  "visual_review": "Separate manual rendering review recorded in reports/QA.md; not an automated visual check",
+  "scope": "Local FF-style model proxies, public observable universe; no official-factor or tradability certification"
+}

@@ -1,0 +1,12 @@
+{
+  "source": "F.I.R.E. asset 256635084",
+  "n_dates": 2509,
+  "n_securities": 5362,
+  "return_adj_inferred_unit": "decimal",
+  "return_price_median_abs_difference": 2.3166649043560028e-07,
+  "return_price_p99_abs_difference": 5.373731255531311e-07,
+  "all_zero_or_missing_securities": 0,
+  "histories_ending_before_last_date": 217,
+  "abs_daily_return_over_30pct_count": 145,
+  "history_completeness": "No authoritative listing/delisting master: cannot certify survivor-free coverage."
+}

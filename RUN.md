@@ -43,6 +43,7 @@ python run_study.py --extract
 python postprocess.py
 python market_reference.py
 python build_report.py
+python verify_delivery.py
 ```
 
 第一次运行用`--extract`选择性解压所需的十个Feather字段，只接受白名单普通文件，不执行归档内容。

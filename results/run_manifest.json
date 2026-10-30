@@ -1,0 +1,43 @@
+{
+  "protocol_date": "2026-10-31",
+  "signal_window": 5,
+  "rebalance_every": 5,
+  "warmup_observations": 60,
+  "signal_start": "2015-04-01",
+  "end": "2024-12-31",
+  "development_end": "2020-12-31",
+  "validation_end": "2021-12-31",
+  "holdout_start": "2022-01-01",
+  "holdout_end": "2024-12-31",
+  "main_one_way_cost_bps": 10,
+  "cost_grid_bps": [
+    0,
+    10,
+    30
+  ],
+  "execution_limit_proxy": 0.095,
+  "hac_daily_lags": 10,
+  "hac_monthly_lags": 3,
+  "min_stocks": 100,
+  "factor_models": [
+    "CAPM",
+    "FF3",
+    "Carhart4"
+  ],
+  "factor_source": "PKU China factors monthly 2000-2023 when available; explicitly labelled locally constructed FF-style factors otherwise",
+  "selection_rule": "No outcome-based parameter or sign selection. Publish both hypotheses and all prespecified proxy checks.",
+  "data_archive_sha256": "38c40f84bb0a7f269b5775d8a80b712cf81138593f5bfb1bae0e91aff3e2228b",
+  "python": "3.12.14",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.18.1",
+    "statsmodels": "0.15.0",
+    "pyarrow": "26.0.0",
+    "matplotlib": "3.11.2",
+    "reportlab": "4.4.9"
+  },
+  "code_commit": "19cf532c42086d2be25e8a43bc879d7e47f2415f",
+  "tracked_code_dirty": false,
+  "data_content_audited": true
+}

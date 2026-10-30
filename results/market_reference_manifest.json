@@ -1,0 +1,75 @@
+{
+  "source": "Tencent Finance public index day bars",
+  "symbol": "sh000300",
+  "download_date": "2026-10-31",
+  "return_type": "price index, not dividend-reinvested or investable net return",
+  "role": "Descriptive broad-market comparison only; not used to choose factors or alter primary tests",
+  "files": [
+    {
+      "year": 2014,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2014-01-01,2014-12-31,640,qfq",
+      "sha256": "082425d2c5c932cfbcd690cb43bbcc1c3b9da223b58ba8a8d951025526b4988c",
+      "rows": 245
+    },
+    {
+      "year": 2015,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2015-01-01,2015-12-31,640,qfq",
+      "sha256": "454bb1a4671e1d8f9c9e3b0e2a5c75b017ff7a651fc3a4b046a6151d77cae3b7",
+      "rows": 244
+    },
+    {
+      "year": 2016,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2016-01-01,2016-12-31,640,qfq",
+      "sha256": "9c8e79a3a84265e27ffae2bce3f7a525e96fbfb9a1f838a558f75680c57a430f",
+      "rows": 244
+    },
+    {
+      "year": 2017,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2017-01-01,2017-12-31,640,qfq",
+      "sha256": "cb3610400d053d64ee1970fc4f870af4167ceba0688645a36cb1de55d2942eb3",
+      "rows": 244
+    },
+    {
+      "year": 2018,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2018-01-01,2018-12-31,640,qfq",
+      "sha256": "e7e34a66947f1136234af67a2c820e9bbcce2c6749e05112da412e4ab5e0b891",
+      "rows": 243
+    },
+    {
+      "year": 2019,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2019-01-01,2019-12-31,640,qfq",
+      "sha256": "455ea2d4bfa63ec05db5822e98e9928959c74575dee6d278ec07cf039e65623c",
+      "rows": 244
+    },
+    {
+      "year": 2020,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2020-01-01,2020-12-31,640,qfq",
+      "sha256": "357b7e91978a33f6a107990328104921ae99afe067fefcdbace0d961ce12ffe7",
+      "rows": 243
+    },
+    {
+      "year": 2021,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2021-01-01,2021-12-31,640,qfq",
+      "sha256": "8369af4843ae35bcb2d2046bb7438fb353abb0055bb748dd7e8c861a910268c5",
+      "rows": 243
+    },
+    {
+      "year": 2022,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2022-01-01,2022-12-31,640,qfq",
+      "sha256": "fffd9b11f67336c840ec6c4382cfc309b5d76cf8deb4b5a7c94563ff2ae02a75",
+      "rows": 242
+    },
+    {
+      "year": 2023,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2023-01-01,2023-12-31,640,qfq",
+      "sha256": "e65a649d4d747d26d43db50661410bbdb5059c973b8663ae63812f54f902eb61",
+      "rows": 242
+    },
+    {
+      "year": 2024,
+      "url": "https://web.ifzq.gtimg.cn/appstock/app/fqkline/get?param=sh000300,day,2024-01-01,2024-12-31,640,qfq",
+      "sha256": "08c801f4c2246c6701c6cc1c00bff8b6daa51cfe28867b0873038b84109a0735",
+      "rows": 242
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+test_alpha_does_not_subtract_rf_from_spread (test_research.ResearchTests.test_alpha_does_not_subtract_rf_from_spread) ... ok
+test_blocked_buy_keeps_cash (test_research.ResearchTests.test_blocked_buy_keeps_cash) ... ok
+test_blocked_sell_remains_held (test_research.ResearchTests.test_blocked_sell_remains_held) ... ok
+test_breadth_is_a_state_not_new_cross_sectional_information (test_research.ResearchTests.test_breadth_is_a_state_not_new_cross_sectional_information) ... ok
+test_costs_and_cash (test_research.ResearchTests.test_costs_and_cash) ... ok
+test_empty_portfolio (test_research.ResearchTests.test_empty_portfolio) ... ok
+test_loss_concentration_endpoints (test_research.ResearchTests.test_loss_concentration_endpoints) ... ok
+test_missing_mark_is_not_liquidation (test_research.ResearchTests.test_missing_mark_is_not_liquidation) ... ok
+test_monthly_missing_factor_stays_missing (test_research.ResearchTests.test_monthly_missing_factor_stays_missing) ... ok
+test_next_open_execution (test_research.ResearchTests.test_next_open_execution) ... ok
+test_no_future_signal_leak (test_research.ResearchTests.test_no_future_signal_leak) ... ok
+test_short_leg_pays_costs (test_research.ResearchTests.test_short_leg_pays_costs) ... ok
+test_suspended_positive_quotes_cannot_fill_orders (test_research.ResearchTests.test_suspended_positive_quotes_cannot_fill_orders) ... ok
+test_ties_not_split (test_research.ResearchTests.test_ties_not_split) ... ok
+test_value_model_uses_previous_december_snapshot (test_research.ResearchTests.test_value_model_uses_previous_december_snapshot) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.597s
+
+OK
