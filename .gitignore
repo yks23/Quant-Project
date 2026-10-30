@@ -9,3 +9,6 @@ data/processed/
 data/download_receipts/
 outputs/
 *.part
+data/*.tar.gz
+data/extracted/
+.mplconfig/
