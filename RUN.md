@@ -94,3 +94,16 @@ python verify_exploration.py
 
 新增27项总测试中的12项覆盖指标顺序、自剔除、标签跨期和部分调仓。部分调仓默认比例仍为1，原始模型行为不变；程序对可用的原账户逐列对账。
 新报告在`reports/mechanism_execution_supplement.pdf`，配套Markdown在同目录。2022-2024仅为已查看样本，2025短扩展不替代新的长期验证。事件标签是对数价格变化，不是扣费回测；执行扩展仅为Q5多头账户。
+
+## 7. 完整动机、设定与方法报告
+
+已有前两轮结果时，执行以下命令；它们不重新回测，也不覆盖前两份报告。
+
+```bash
+python build_integrated_report.py
+python verify_integrated_report.py
+```
+
+输出为`reports/integrated_research_report.pdf`和同名Markdown，涵盖Motivation、Setup、Methods、结果、贡献边界和参考资料。目录支持跳转，中文可搜索/复制。`results/integrated_report_manifest.json`记录所用CSV和图的摘要，验证脚本还会检查旧报告未改变、费用恒等式与关键数字。
+
+整合稿绑定`config/integrated_report_snapshot.json`中的37个证据文件。任何来源变动都会使构建停止，防止新表格与旧正文混用；新的结果版本需要重新核对正文、审阅并建立新的证据快照。

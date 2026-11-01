@@ -1,0 +1,77 @@
+{
+  "unit_tests": 27,
+  "pages": 21,
+  "bookmarks": 19,
+  "input_fingerprints": "passed",
+  "previous_reports_unchanged": true,
+  "changed_evidence_rejected": true,
+  "cost_identity": "passed",
+  "pdf_sha256": "9a0098e95dd9836155e9d55b9810192121c54666042efd309f9744dd4ce33569",
+  "mechanical_style_checks": {
+    "M1_dashes": {
+      "count": 0,
+      "hits": []
+    },
+    "M11_passive": {
+      "count": 0,
+      "hits": []
+    },
+    "M2_antithesis": {
+      "count": 0,
+      "hits": []
+    },
+    "M3_M4_M8_M9_filler": {
+      "count": 0,
+      "hits": []
+    },
+    "M6_openers": {
+      "count": 0,
+      "hits": []
+    },
+    "M5_M16_words": {
+      "count": 0,
+      "hits": []
+    },
+    "M10_hype": {
+      "count": 0,
+      "hits": []
+    },
+    "M17_fancy": {
+      "count": 0,
+      "hits": []
+    },
+    "M18_empty_openers": {
+      "count": 0,
+      "hits": []
+    },
+    "M12_wordiness": {
+      "count": 0,
+      "hits": []
+    },
+    "M13_qualifiers": {
+      "count": 0,
+      "hits": []
+    },
+    "M14_ordinals": {
+      "count": 0,
+      "hits": []
+    },
+    "M15_exclamation": {
+      "count": 0,
+      "hits": []
+    },
+    "B_precision": {
+      "count": 0,
+      "hits": []
+    },
+    "decomposition_drift": {
+      "count": 0,
+      "hits": []
+    },
+    "zh_promotional": {
+      "count": 0,
+      "hits": []
+    }
+  },
+  "limitations": "Regex checks do not verify Chinese semantics or visual layout; independent and rendered review are separate."
+}

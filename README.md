@@ -4,11 +4,12 @@
 
 ## 从这里开始
 
-1. [中文研究报告 PDF](reports/factor_study_report.pdf) · [可搜索Markdown](reports/factor_study_report.md)。
-2. [一页运行指南](RUN.md)：下载固定数据、测试、全量计算和生成报告。
-3. [固定研究方案](PROTOCOL.md) · [风险模型口径](PROXY_MODELS.md) · [结果表](results/)。
-4. [HANDOFF.md](HANDOFF.md)说明研究设计；[SETUP.md](SETUP.md)保留多数据源自然语言部署指南。
-5. [二轮机制与执行诊断 PDF](reports/mechanism_execution_supplement.pdf) · [Markdown](reports/mechanism_execution_supplement.md)：指标拆解、强控制、入场前后标签、逐年冻结预测、固定半量调仓及pre讲述提纲。
+1. [完整研究报告 PDF](reports/integrated_research_report.pdf) · [Markdown](reports/integrated_research_report.md)：从Motivation、Setup、Methods到结果解释，整合两轮证据，含目录和公式。
+2. [第一轮原始报告 PDF](reports/factor_study_report.pdf) · [可搜索Markdown](reports/factor_study_report.md)。
+3. [一页运行指南](RUN.md)：下载固定数据、测试、全量计算和生成报告。
+4. [固定研究方案](PROTOCOL.md) · [风险模型口径](PROXY_MODELS.md) · [结果表](results/)。
+5. [HANDOFF.md](HANDOFF.md)说明研究设计；[SETUP.md](SETUP.md)保留多数据源自然语言部署指南。
+6. [二轮机制与执行诊断 PDF](reports/mechanism_execution_supplement.pdf) · [Markdown](reports/mechanism_execution_supplement.md)：指标拆解、强控制、入场前后标签、逐年冻结预测、固定半量调仓及pre讲述提纲。
 
 二轮研究使用已查看的2022-2024样本，全部标为探索性，不重命名为新留出检验。2025年1-4月只作短期时间扩展。新增指标未证明稳定预测增量；PATH多头半量调仓净年化均值改善1.48个百分点，但复合年收益仍为-2.03%。原报告保留不变。
 

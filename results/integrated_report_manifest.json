@@ -1,0 +1,33 @@
+{
+  "purpose": "Integrated motivation, setup, methods, results and interpretation; no new backtest",
+  "base_commit": "b0989ed5c63d2bd334948c38e4fb297fcbb45777",
+  "builder_sha256": "bcb8b1494adbab4e7e7edad09f22d115a650c118e9d52c67bf3fb1d081655d82",
+  "evidence_snapshot_sha256": "8884cd371871c2d2e1f42db4a7e0db136176f2e3a7f60a8e738d25cdcc06b4a0",
+  "input_csv_sha256": {
+    "results/alpha_local_proxy.csv": "0c76d097c699574ae1a61d8959252aca5d35de46b6cc3f89bfd0d33cd88da7d1",
+    "results/breadth_by_period.csv": "5b93f205b66e1a7810466f78788321cb50498960eecbea162d800d872ba8bb94",
+    "results/breadth_state_events.csv": "2523a0703dd999bd28cc8c0e06f65fc01d7ba9a0a42bb1055728db5077b0d666",
+    "results/double_sort_spreads_by_period.csv": "4649da9f4ea14932ef1dc63f1cae473c2bb1060b66fafb3c4452d173addbe069",
+    "results/execution_diagnostics.csv": "4be725ee343e4f163fd72d0e96cf75eb460cb0470afaf494aeabb4d2d4dc41c2",
+    "results/exploration/coefficient_summary.csv": "192785eab1d56ee4c96923a16c1558edbc15a9aef5e623ccd3ac10227752e261",
+    "results/exploration/gross_spread_sharpe_bootstrap.csv": "04036af7e89bd6f0e4931e03e06bc651dace2d19a85b879a6d4317e0c102d660",
+    "results/exploration/label_coverage.csv": "a96334a551b4ccc8fe9b4b50650071579431e3fd44f3c1604125339fe0fff1e7",
+    "results/exploration/matched_spreads.csv": "718d98a94d36d416341699216d7185e69b5504145003650eff24752f550df741",
+    "results/exploration/original_cost_waterfall.csv": "8725cc932a6e8a8222537b610762da2d7f026c8adefdcb2f9c6c6678f6e69d15",
+    "results/exploration/partial_rebalance_decomposition.csv": "30a9be7acfbaae95d551cf4e69a711ad5908b1d40c149a4007ff9d225afe54a4",
+    "results/exploration/partial_rebalance_performance.csv": "2e078609bf3507b154180c1a70e6bc3dc493ff4655318f285ede134603ffd43a",
+    "results/exploration/prediction_summary.csv": "ce12b9015745dc645a6e26e3770d9f77e3c2a830120620864cdd0e2990c111aa",
+    "results/incremental_by_period.csv": "208c3ea6a2171e0231003471c88da3b30799f772a1ae0235133ffcf0e3242a08",
+    "results/market_reference_performance.csv": "3284cb558fe52a5469974211ced8e9145feb3cc87358ad8bf0527cc6b010fc42",
+    "results/performance.csv": "3ed7ceb31a595f37be74dbfbc18ac426cd7f75d617fa13963e16134610fa45e3"
+  },
+  "figure_sha256": {
+    "reports/figures/coverage.png": "1dcc785f6f8dce56bf3f5b980858569039c8d6400906794b7c7438dbc091d9fe",
+    "reports/figures/exploration_horizons.png": "ef87b68b8198bdf41834e06931f0432f0009d9454c7f6e584a57800808717fdb",
+    "reports/figures/integrated_quintiles.png": "7f72f8555768547737d37d595010e0563a310de6ef298a621e62eb618f1c564a",
+    "reports/figures/spread_drawdown.png": "79b3fe8024c3f9887329f422ed0a7c2c367f4f577d81722d7cead4704b610bab"
+  },
+  "pdf_sha256": "9a0098e95dd9836155e9d55b9810192121c54666042efd309f9744dd4ce33569",
+  "markdown_sha256": "af293224d0afa0db4b58c913c43c2d1c0cd58bc921538b8c4946c1a5df525128",
+  "previous_reports_preserved": true
+}
