@@ -1,0 +1,32 @@
+{
+  "status": "complete",
+  "protocol_sha256": "69110197dbc3f307ca96189f27b0fcde51a164197ccf6d763dbcde3237651ade",
+  "code_sha256": {
+    "run_execution_extension.py": "a6f1261064730f2e31cabb05c1c4e95798fe41fb4c396a2eb61b18a2ab9660a9",
+    "src/backtest.py": "e09748582214718d72496c7fcba1c32ed3deffbbbbc7504857ff8a47b0ab5995"
+  },
+  "rebalance_fractions": [
+    1.0,
+    0.5
+  ],
+  "costs_bps": [
+    0,
+    10
+  ],
+  "sample_status": "exploratory; not new holdout evidence",
+  "seconds": 10.075212001800537,
+  "original_account_checks": [
+    {
+      "account": "PATH_FULL_c0",
+      "maximum_original_reconciliation_error": 0.0
+    },
+    {
+      "account": "PATH_FULL_c10",
+      "maximum_original_reconciliation_error": 0.0
+    },
+    {
+      "account": "REV_FULL_c10",
+      "maximum_original_reconciliation_error": 0.0
+    }
+  ]
+}

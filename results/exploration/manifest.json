@@ -1,0 +1,44 @@
+{
+  "status": "complete",
+  "protocol_date": "2026-11-01",
+  "protocol_sha256": "065a2605be8c36865b239398a81e4af5d571a8a504e28e5fa5f2f2cca9944f6e",
+  "code_sha256": {
+    "run_mechanisms.py": "19c4d5bcb54f2907ec20b9f087a3cd488a691afe7c12e020e85d9b824894dc37",
+    "src/mechanisms.py": "7ef55272f7a0e9031a3fb46a7a34e936a968f0a642cfb4c3087073082206bae8"
+  },
+  "parent_commit": "b884b5b2a1a726aaef1a6163871f03c88846aecd",
+  "input_sha256": {
+    "close": "1bcb00fb0badaab88c7f45869f562048137039cc5d410c568653c386e19c239a",
+    "open": "9132416c65a3632534a17b3faf52cf2870d787e91a482df6a5c35e7886c07371",
+    "volume": "74fa55b20e3bf535646837c3cefd8087cc0d8c45c307becd460c3a6d36b18a1e",
+    "money": "e60abe141335e8815e0902188c792a0617f3272d2ed95ab5ae05de94566d6578",
+    "market_cap_ashare": "ff9b3ddd836314de54454d40e7c5af4198c7cfedbc7c95642aa27d7b55cd1178",
+    "close_dr": "a6248762a6b2d24f8e75843dc7c9440ee41d3e6b5548d8660fff292894f68cca"
+  },
+  "status_of_old_holdout": "reused; exploratory only",
+  "event_returns": "log price labels, not executable strategy returns; no transaction costs",
+  "inference_min_dates": 20,
+  "periods": {
+    "development": [
+      "2015-04-01",
+      "2020-12-31"
+    ],
+    "validation_reused": [
+      "2021-01-01",
+      "2021-12-31"
+    ],
+    "reused_2022_2024": [
+      "2022-01-01",
+      "2024-12-31"
+    ],
+    "extension_2025": [
+      "2025-01-01",
+      "2025-04-30"
+    ]
+  },
+  "seconds": 27.590831756591797,
+  "formation_dates": 483,
+  "n_symbols": 5362,
+  "first": "2015-04-09",
+  "last": "2025-04-29"
+}

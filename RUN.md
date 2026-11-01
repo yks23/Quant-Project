@@ -79,3 +79,18 @@ python build_report.py
 本次程序按`PROXY_MODELS.md`构造本地FF式代理，不能把文件名中的FF3理解为已取得官方标准序列。
 RF主假设为年化1.5%，0%/3%敏感性不改变选股。外部北大因子入口在[这里](https://www.gsm.pku.edu.cn/finvc/info/1027/1147.htm)，下载可能需要人工验证码。
 使用外部序列时必须先核实RF、单位、模型列和月份，单独输出标准序列表；不得插值2024、改用美股因子或把验证码HTML当作Excel。
+
+## 6. 二轮机制与执行诊断
+
+先完成上述原始研究，保留`data/processed/`。新方案见`EXPLORATION_PROTOCOL.md`和`EXECUTION_EXTENSION.md`，输出写入独立的`results/exploration/`，不覆盖原报告。
+
+```bash
+python -m unittest discover -s tests -v
+python run_mechanisms.py
+python run_execution_extension.py
+python build_exploration_report.py
+python verify_exploration.py
+```
+
+新增27项总测试中的12项覆盖指标顺序、自剔除、标签跨期和部分调仓。部分调仓默认比例仍为1，原始模型行为不变；程序对可用的原账户逐列对账。
+新报告在`reports/mechanism_execution_supplement.pdf`，配套Markdown在同目录。2022-2024仅为已查看样本，2025短扩展不替代新的长期验证。事件标签是对数价格变化，不是扣费回测；执行扩展仅为Q5多头账户。

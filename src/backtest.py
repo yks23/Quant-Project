@@ -5,7 +5,9 @@ import pandas as pd
 
 
 def simulate(open_price, close, target, signal_rows, start, end, cost_bps=10, limit=0.095,
-             execution_available=None):
+             execution_available=None, rebalance_fraction=1.0):
+    if not 0 < rebalance_fraction <= 1:
+        raise ValueError("rebalance_fraction must be in (0, 1]")
     opens, closes = open_price.to_numpy(dtype=float), close.to_numpy(dtype=float)
     targets = target.to_numpy(dtype=float)
     availability = None if execution_available is None else execution_available.to_numpy(dtype=bool)
@@ -34,6 +36,8 @@ def simulate(open_price, close, target, signal_rows, start, end, cost_bps=10, li
             # Reserve enough cash for fees, then sell before scaling purchases.
             desired = np.divide(nav_open * w / (1 + cost), at_open,
                                 out=np.zeros_like(shares), where=at_open > 0)
+            if rebalance_fraction < 1:
+                desired = shares + rebalance_fraction * (desired - shares)
             gap = np.divide(opens[t], marks, out=np.full_like(shares, np.nan),
                             where=marks > 0) - 1
             sell_ok = valid_open & np.isfinite(gap) & (gap > -limit)
