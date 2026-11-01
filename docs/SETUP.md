@@ -2,6 +2,7 @@
 
 本指南面向第一次接手项目的组员。无需数据库账号、不用购买接口，也不需要启动网页或服务端。
 本指南保留多数据源的下载选择；运行本次两个因子请先看[RUN.md](RUN.md)。原始大文件从公开上游获取，不再分发。
+2026-11-02起，研究模块在`study/`；下文数据目录均以`study/`为起点。多数据源目录是早期接手约定，主实验的确切归档路径以RUN指南为准。
 
 ## 1. 先选哪套数据
 
@@ -12,17 +13,18 @@
 ## 2. 准备本地工作目录和环境
 
 从 `https://github.com/yks23/Quant-Project` clone 仓库；没有 Git 的同学也可以在 GitHub 页面点击 Code → Download ZIP，再解压到自己的项目目录。
-后面的“仓库根目录”就是包含本文件和 `HANDOFF.md` 的目录，不是某位组员机器上的固定绝对路径。
+仓库根目录包含`README.md`、`study/`和`slides/`；本指南位于`docs/`。以下研究数据路径以`study/`为起点，不是某位组员机器上的固定绝对路径。
 
-建议使用 Python 3.11 的独立虚拟环境。它是兼容性起点，不是已经跑通的锁定环境；不要混用系统 Python 和其他项目的依赖。
+本次研究采用 Python 3.12 独立虚拟环境，固定依赖见`study/requirements-tested.txt`。备选数据源可能另有兼容要求；不要混用系统 Python 和其他项目的依赖。
 Windows 可用原生 Python，Qlib 安装遇到编译问题时优先考虑 WSL；Mac 和 Linux 可直接使用终端。
 
 Mac/Linux 的基础环境命令如下，Windows 激活入口对应 `.venv\Scripts\Activate.ps1`：
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
+cd study
 ```
 
 请先确认创建虚拟环境的 `python3` 版本。激活后所有安装统一用 `python -m pip`。
@@ -67,7 +69,7 @@ python run_study.py --extract --archive data/raw/fire/AStockData.tar.gz
 
 应能显示日期范围、证券列名和少量非空价格，并检查开收盘、成交量矩阵是否对齐。文档描述的覆盖为 2015-01-01 至 2025-05-01，2509 行、5363 列，但需以实际文件为准。
 价格矩阵的正值不能被错误转成字符串；零价不能用于收益计算。特别检查退市证券零值究竟出现在哪些日期。
-详细字段和已知风险见 [数据说明](data/README.md)。只有满足字段验收，才能开始比较因子结果。
+详细字段和已知风险见 [数据说明](../study/data/README.md)。只有满足字段验收，才能开始比较因子结果。
 
 ## 4. investment_data：另一套公开量价数据
 
@@ -78,7 +80,7 @@ python run_study.py --extract --archive data/raw/fire/AStockData.tar.gz
 - [qlib_bin.tar.gz](https://github.com/chenditc/investment_data/releases/download/2026-10-29/qlib_bin.tar.gz)：569,939,495 字节。
 - [qlib_bin.manifest.json](https://github.com/chenditc/investment_data/releases/download/2026-10-29/qlib_bin.manifest.json)：511 字节。
 
-全组使用相同固定版本，不使用持续变化的 `latest`。两个文件的 SHA-256 都保存在 [sources.json](data/sources.json)；该记录来自 GitHub release API。
+全组使用相同固定版本，不使用持续变化的 `latest`。两个文件的 SHA-256 都保存在 [sources.json](../study/data/sources.json)；该记录来自 GitHub release API。
 
 Mac 使用 `shasum -a 256 文件路径`，Linux 使用 `sha256sum 文件路径`，Windows PowerShell 使用 `Get-FileHash 文件路径 -Algorithm SHA256`。
 输出摘要必须与清单对应文件的 `sha256` 字段完全一致。大小正确不代表内容正确；摘要不一致时停止加载，重新核实版本，不能直接修改清单使其通过。

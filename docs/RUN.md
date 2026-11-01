@@ -5,13 +5,14 @@
 ## 1. 安装
 
 用Python 3.12创建独立虚拟环境，预留15GB磁盘。全量运行建议16GB或更多内存。
-以下命令在项目根目录逐条执行；Windows将激活命令换成`.venv\Scripts\Activate.ps1`。
+以下命令从项目根目录开始，激活环境后进入`study/`；Windows将激活命令换成`.venv\Scripts\Activate.ps1`。第2-7节的相对路径和Python命令都以`study/`为运行目录。
 
 ```bash
 git clone https://github.com/yks23/Quant-Project.git
 cd Quant-Project
 python3.12 -m venv .venv
 source .venv/bin/activate
+cd study
 python -m pip install -r requirements-tested.txt
 ```
 
@@ -19,14 +20,14 @@ python -m pip install -r requirements-tested.txt
 
 ## 2. 下载同一份公开行情
 
-在仓库根目录执行。网络断开时可重新执行，`-C -`从已有文件继续下载。
+在`study/`目录执行。网络断开时可重新执行，`-C -`从已有文件继续下载。
 
 ```bash
 mkdir -p data
 curl -L --fail --retry 3 -C - -o data/AStockData.tar.gz https://github.com/fire-institute/fire/releases/download/marketdata/AStockData.tar.gz
 ```
 
-浏览器也可以打开[固定发布页](https://github.com/fire-institute/fire/releases/tag/marketdata)，点击`AStockData.tar.gz`，放到本项目`data/`。
+浏览器也可以打开[固定发布页](https://github.com/fire-institute/fire/releases/tag/marketdata)，点击`AStockData.tar.gz`，放到本项目`study/data/`。
 文件应为1,396,296,954字节。`results/run_manifest.json`记录本次实际文件SHA-256；运行前可用下列命令严格核对：
 
 ```bash
@@ -107,3 +108,17 @@ python verify_integrated_report.py
 输出为`reports/integrated_research_report.pdf`和同名Markdown，涵盖Motivation、Setup、Methods、结果、贡献边界和参考资料。目录支持跳转，中文可搜索/复制。`results/integrated_report_manifest.json`记录所用CSV和图的摘要，验证脚本还会检查旧报告未改变、费用恒等式与关键数字。
 
 整合稿绑定`config/integrated_report_snapshot.json`中的37个证据文件。任何来源变动都会使构建停止，防止新表格与旧正文混用；新的结果版本需要重新核对正文、审阅并建立新的证据快照。
+
+## 8. Marp 汇报
+
+回到仓库根目录，安装固定版本的Marp并构建离线HTML及PDF：
+
+```bash
+cd ..
+npm ci
+npm run slides
+```
+
+打开`slides/dist/quant-study.html`或`slides/dist/quant-study.pdf`。修改正文用`slides/quant-study.md`，主题在`slides/theme/lecture.css`。PDF导出需要Chrome、Edge或Firefox；已提交的成品无需安装任何构建依赖。
+
+从既有CSV重新生成展示图：`make figures`。这一命令不会改写研究结果。详情见[slides/README.md](../slides/README.md)。

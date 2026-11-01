@@ -1,0 +1,16 @@
+{
+  "purpose": "Marp presentation of existing evidence, not a new research edition",
+  "marp_cli": "4.5.1",
+  "input_sha256": {
+    "slides/quant-study.md": "e3091c624191acc7460dab5af0f911d6d4ce8b9deb8f43f352a8d0775ed386d4",
+    "slides/theme/lecture.css": "451325f579845c46b313159ae4328ce463a3bed0757201e37f0b91aa1c29f7c6",
+    "slides/marp.config.cjs": "52c78109160e1e92c9cdbd49da94cdb8d00a6f19be0290f959eb46c5eddd759e",
+    "slides/scripts/build.mjs": "412cced8ec7a473fba8808a66e6ff5495c417d45d9f2da17cf09a3791c512b31",
+    "slides/assets/manifest.json": "0bee5e17ca7222683e864289a2d1e951c27f05a2b90389104dcdf2a35db6816f",
+    "package-lock.json": "896175ef0943f58d497ee773bbec8771c8d1028a76a58d8819d5fdd1596e6221"
+  },
+  "output_sha256": {
+    "slides/dist/quant-study.html": "a9ebf20622101f7890b77db8947439db9e5cf9a00cabf906b98d410b205162b6",
+    "slides/dist/quant-study.pdf": "fb99985af731953cfdc0dec58111923f1ea39ca23f8e2fe3e7d396020ef54c0c"
+  }
+}

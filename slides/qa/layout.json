@@ -1,0 +1,300 @@
+{
+  "slides": 29,
+  "image_count": 6,
+  "offline_navigation": "passed",
+  "failures": [],
+  "pages": [
+    {
+      "page": 1,
+      "title": "同样的跌幅，不同的过程",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 2,
+      "title": "相同的累计跌幅，未必是相同的信息",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 1
+    },
+    {
+      "page": 3,
+      "title": "两个问题，以及一个共同的检验标准",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 4,
+      "title": "定义 1：PATH 的方向与集中度",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 5,
+      "title": "命题 1：集中度不识别日期顺序",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 6,
+      "title": "定义 2：BREADTH 实际是状态切换",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 7,
+      "title": "把“有效”拆成可分别检验的问题",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 8,
+      "title": "固定公开行情与可观察样本",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 9,
+      "title": "从公开归档导入真实数据",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 10,
+      "title": "形成日过滤与证据阶段",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 11,
+      "title": "信号形成后，最早在下一开盘入场",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 12,
+      "title": "交易成本跟着成交额，而不是持有天数",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 13,
+      "title": "三种资产定价结构，共同样本比较",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 14,
+      "title": "五分组：PATH 有梯度，BREADTH 没有",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 1
+    },
+    {
+      "page": 15,
+      "title": "全期收益与回撤提供风险背景",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 1
+    },
+    {
+      "page": 16,
+      "title": "两个正 Alpha 主假设均未获支持",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 17,
+      "title": "12.45% 到 −2.91%：费用可以逐项对账",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 1
+    },
+    {
+      "page": 18,
+      "title": "BREADTH 的问题在扣费之前已出现",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 19,
+      "title": "分开测量集中度、时点与同步性",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 20,
+      "title": "用强控制和入场前后标签定位增量",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 21,
+      "title": "可辨认的缺口关系，不等于五日预测增量",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 1
+    },
+    {
+      "page": 22,
+      "title": "增强模型没有带来稳定的排序改善",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 1
+    },
+    {
+      "page": 23,
+      "title": "固定半量调仓：少付费用，也少拿毛收益",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 24,
+      "title": "验证实现，同时约束证据能支持的结论",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 25,
+      "title": "当前边界决定下一步需要什么数据",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 26,
+      "title": "结论：测量、增量与执行必须分别成立",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 27,
+      "title": "算术均值、复利、Alpha 不可互换",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 28,
+      "title": "Q1–Q5 的三模型年化 Alpha",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    },
+    {
+      "page": 29,
+      "title": "输入字段、替代代理与条件比较",
+      "overflow": [],
+      "overlap": [],
+      "runningFurniture": 0,
+      "mathErrors": 0,
+      "brokenImages": 0,
+      "imageCount": 0
+    }
+  ],
+  "html_sha256": "a9ebf20622101f7890b77db8947439db9e5cf9a00cabf906b98d410b205162b6",
+  "pdf_sha256": "fb99985af731953cfdc0dec58111923f1ea39ca23f8e2fe3e7d396020ef54c0c"
+}

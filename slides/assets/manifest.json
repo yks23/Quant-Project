@@ -1,0 +1,38 @@
+{
+  "purpose": "Presentation-only redrawing; no new backtest",
+  "inputs_sha256": {
+    "study/results/performance.csv": "3ed7ceb31a595f37be74dbfbc18ac426cd7f75d617fa13963e16134610fa45e3",
+    "study/results/daily_portfolio_returns.csv": "7ee85f2f7e8c9667c9361dcad723a421c0b1f4cbf7a32c2b4e834a7f20b6ebba",
+    "study/results/market_reference_returns.csv": "8f6c48097f7d583da49e5e75d53e9fe7dcd8d1f2774971c32553b4bc62dbe687",
+    "study/results/exploration/original_cost_waterfall.csv": "8725cc932a6e8a8222537b610762da2d7f026c8adefdcb2f9c6c6678f6e69d15",
+    "study/results/exploration/coefficient_summary.csv": "192785eab1d56ee4c96923a16c1558edbc15a9aef5e623ccd3ac10227752e261",
+    "study/results/exploration/prediction_summary.csv": "ce12b9015745dc645a6e26e3770d9f77e3c2a830120620864cdd0e2990c111aa"
+  },
+  "outputs": {
+    "slides/assets/motivation.svg": {
+      "sha256": "fa51374c7c40128110ac5a285ea001173809de21b32372e24e7f58710451bf39",
+      "description": "Constructed illustration only; all three paths sum to -5% log return."
+    },
+    "slides/assets/quintiles.svg": {
+      "sha256": "0b4f9607f0331157a0c9085f9903718577003dcb90aa838555ff372e3099b288",
+      "description": "2022-2024 Q1-Q5 long-only accounts; 10 bp one-way; excess above assumed RF, not alpha."
+    },
+    "slides/assets/returns.svg": {
+      "sha256": "53c9970fc7b3f84178dcad9453717dd761acac4617f17a5f4a856bce2ead84e3",
+      "description": "2015-04-01 to 2024-12-31; synthetic LS and EW at 10 bp; CSI300 price index has no fees/dividends. Exposures differ."
+    },
+    "slides/assets/cost-waterfall.svg": {
+      "sha256": "778ae78ff3b96f636c79619f5ed547c7d7338abee6ba5b00e03958fba6b4b066",
+      "description": "Exact PATH 2022-2024 arithmetic-mean decomposition, not CAGR. Fees use actual traded notional."
+    },
+    "slides/assets/timing.svg": {
+      "sha256": "89ab1451ce7ac459f0b07164acc9d68f024c1d11f2ea9557aa8cf0ec39a7d4f8",
+      "description": "Reused 2022-2024 exploratory sample; strong controls; individual 95% HAC intervals. See Holm-adjusted tests separately."
+    },
+    "slides/assets/prediction.svg": {
+      "sha256": "6d9473c6e59af8dd72f051f5556ae03d0744c86cb19f9693b68b72ad0a23ecb6",
+      "description": "Yearly frozen prediction; baseline vs enhanced rank IC. 2022-2024 is reused, 2025 has only 15 complete labels."
+    }
+  },
+  "generator_sha256": "c7470e745662a65a5193ac91b5421b1106a35b4fdf55ed7dd2fe876bf3cad0f3"
+}

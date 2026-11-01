@@ -1,2 +1,6 @@
 *.pdf binary
 *.png binary
+
+# Matplotlib SVG paths contain harmless generated trailing whitespace.
+slides/assets/*.svg linguist-generated=true -whitespace
+slides/dist/* linguist-generated=true

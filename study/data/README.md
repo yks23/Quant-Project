@@ -53,7 +53,7 @@ HDF5 内部路径：`/date`、`/stock_code`、`/close`、`/previous_close`。
 
 ## 下载与校验
 
-完整的自然语言步骤见[本地部署指南](../SETUP.md)。本次计算入口见[RUN.md](../RUN.md)，程序直接读取真实Feather，缺字段报错，不使用上游随机回退接口。
+完整的自然语言步骤见[本地部署指南](../../docs/SETUP.md)。本次计算入口见[RUN.md](../RUN.md)，程序直接读取真实Feather，缺字段报错，不使用上游随机回退接口。以下数据路径以`study/`为起点。
 
 用浏览器打开上述直接下载链接，下载完成后移入仓库的 `data/raw/fire/`、`data/raw/qlib/` 或 `data/raw/zenodo/`。
 目录可以自己创建；这些目录是建议约定，不代表 clone 后已经存在数据文件。

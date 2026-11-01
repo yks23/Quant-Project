@@ -1,0 +1,16 @@
+{
+  "name": "quant-project-presentation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reproducible Marp lecture notes for the A-share reversal study",
+  "scripts": {
+    "slides": "node slides/scripts/build.mjs",
+    "slides:check": "node slides/scripts/check.mjs"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "4.5.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

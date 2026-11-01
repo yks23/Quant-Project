@@ -1,0 +1,4 @@
+{
+  "markdown.marp.themes": ["./slides/theme/lecture.css"],
+  "markdown.marp.enableHtml": true
+}

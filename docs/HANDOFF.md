@@ -2,7 +2,8 @@
 
 更新日期：2026-10-31。本文可直接交给组员或后续 coding agent。
 
-当前运行入口是[RUN.md](RUN.md)，结论入口是[研究报告](reports/factor_study_report.pdf)。
+当前运行入口是[RUN.md](RUN.md)，最新结论入口是[整合报告](../study/reports/integrated_research_report.pdf)。
+2026-11-02目录整理后，以下研究文件路径均以`study/`为起点。本文保留第一轮交接背景；后续机制与执行结论以整合报告为准。
 以下保留最初研究思路；所有实际参数与当前结果以`PROTOCOL.md`、`config/study.json`及`results/`为准。
 本轮冻结为2015-2020开发、2021验证、2022-2024留出；主窗口只有5日，不执行1/3/10日参数搜索。
 

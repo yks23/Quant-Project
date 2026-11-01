@@ -1,6 +1,6 @@
 {
   "unit_tests_pass": true,
-  "unit_test_count": 15,
+  "unit_test_count": 27,
   "finite_daily_returns": true,
   "daily_return_rows": 2374,
   "portfolio_series": 57,

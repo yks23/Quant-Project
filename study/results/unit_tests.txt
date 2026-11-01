@@ -1,3 +1,15 @@
+test_breadth_removes_self_and_missing (test_mechanisms.MechanismTests.test_breadth_removes_self_and_missing) ... ok
+test_concentration_is_permutation_invariant (test_mechanisms.MechanismTests.test_concentration_is_permutation_invariant) ... ok
+test_cross_period_labels_are_excluded (test_mechanisms.MechanismTests.test_cross_period_labels_are_excluded) ... ok
+test_geometry_does_not_read_later_rows (test_mechanisms.MechanismTests.test_geometry_does_not_read_later_rows) ... ok
+test_partial_execution_changes_shares_not_return_scaling (test_mechanisms.MechanismTests.test_partial_execution_changes_shares_not_return_scaling) ... ok
+test_partial_execution_fees_are_paid (test_mechanisms.MechanismTests.test_partial_execution_fees_are_paid) ... ok
+test_partial_rebalance_range (test_mechanisms.MechanismTests.test_partial_rebalance_range) ... ok
+test_recency_distinguishes_order (test_mechanisms.MechanismTests.test_recency_distinguishes_order) ... ok
+test_residual_is_orthogonal_without_future_outcome (test_mechanisms.MechanismTests.test_residual_is_orthogonal_without_future_outcome) ... ok
+test_standardization_is_formed_sample_only (test_mechanisms.MechanismTests.test_standardization_is_formed_sample_only) ... ok
+test_sync_uses_alignment_not_common_level (test_mechanisms.MechanismTests.test_sync_uses_alignment_not_common_level) ... ok
+test_zero_loss_is_undefined_not_fabricated (test_mechanisms.MechanismTests.test_zero_loss_is_undefined_not_fabricated) ... ok
 test_alpha_does_not_subtract_rf_from_spread (test_research.ResearchTests.test_alpha_does_not_subtract_rf_from_spread) ... ok
 test_blocked_buy_keeps_cash (test_research.ResearchTests.test_blocked_buy_keeps_cash) ... ok
 test_blocked_sell_remains_held (test_research.ResearchTests.test_blocked_sell_remains_held) ... ok
@@ -15,6 +27,6 @@ test_ties_not_split (test_research.ResearchTests.test_ties_not_split) ... ok
 test_value_model_uses_previous_december_snapshot (test_research.ResearchTests.test_value_model_uses_previous_december_snapshot) ... ok
 
 ----------------------------------------------------------------------
-Ran 15 tests in 0.597s
+Ran 27 tests in 0.999s
 
 OK
